@@ -1,0 +1,22 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Components['settlement/form']({
+        el: $('form.settlement-form')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      span.text-muted Nuevo Barrio/Asentamiento
+      span.sparkline.bar data-type="bar"
+  == display_flash_message
+  form.settlement-form name="settlement" action=url("/settlements/new") method="post"
+    .hidden
+      == authenticity_token
+    .card.card-block
+      == partial :"/settlements/partials/form_inputs", locals: { is_new: true }
+      .form-group.row
+        .col-sm-10.offset-sm-2
+          button.btn.btn-success type="submit"
+            | Crear nuevo

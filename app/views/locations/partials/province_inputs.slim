@@ -1,0 +1,16 @@
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Nombre:
+  .col-sm-10
+    input.form-control.underlined type="text" name="province[name]" value=province.name
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | País:
+  .col-sm-10
+    select name="province[country_id]"
+      == country_options_for_select(province.country_id)
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right Polígono:
+  .col-sm-10
+    textarea.poligon-text.form-control.underlined name="province[poligon]"
+      =province.poligon

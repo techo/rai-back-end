@@ -1,0 +1,88 @@
+- is_new = is_new || false
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | ID:
+  .col-sm-10
+    - if is_new
+      input.form-control.underlined type="text" name="settlement[string_id]"
+    - else
+      input.form-control.underlined type="text" name="settlement[string_id]" disabled="disabled" value=@settlement.string_id
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Nombre:
+  .col-sm-10
+    input.form-control.underlined type="text" name="settlement[name]" value=@settlement.name
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Otros nombres:
+  .col-sm-10
+    input.form-control.underlined type="text" name="settlement[other_names]" value=@settlement.other_names
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Año de creación:
+  .col-sm-10
+    input.form-control.underlined type="text" name="settlement[creation_year]" value=@settlement.creation_year
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Localidad:
+  .col-sm-10
+    select name="settlement[town_id]"
+      == town_options_for_select(@settlement.town_id)
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Fotos Satelitales:
+  .col-sm-10
+    .row.satellite-picture
+      .col-sm-2
+        input.form-control.underlined type="text"  placeholder="Año" name="settlement[satellite_pictures][2013][year]" value="2013" disabled="disabled"
+      .col-sm-10
+        input.form-control.underlined type="text"  placeholder="Url completa" name="settlement[satellite_pictures][2013][url]" value=@settlement.satellite_pictures_url['2013']
+    .row.satellite-picture
+      .col-sm-2
+        input.form-control.underlined type="text"  placeholder="Año" name="settlement[satellite_pictures][2016][year]" value="2016" disabled="disabled"
+      .col-sm-10
+        input.form-control.underlined type="text"  placeholder="Url completa" name="settlement[satellite_pictures][2016][url]" value=@settlement.satellite_pictures_url['2016']
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Fotos:
+  .col-sm-10.pictures-list
+    .row
+      .col-sm-2
+        small.text-muted Año de la foto
+      .col-sm-10
+        small.text-muted URL completa de la foto
+    script.picture-template type="text/template" id="picture-template" class="hidden"
+      .row.picture
+        .col-sm-2
+          input type="hidden" name="settlement[pictures][][id]"
+          input.form-control.underlined type="text"  placeholder="Año" name="settlement[pictures][][year]"
+        .col-sm-8
+          input.form-control.underlined type="text"  placeholder="Url completa" name="settlement[pictures][][url]"
+        .col-sm-2
+          div.btn.btn-secondary.btn-sm.remove-picture-btn
+            i.fa.fa-times-circle
+            | Eliminar
+    - if @settlement.pictures.empty?
+      .row.picture
+        .col-sm-2
+          input type="hidden" name="settlement[pictures][][id]"
+          input.form-control.underlined type="text"  placeholder="Año" name="settlement[pictures][][year]"
+        .col-sm-10
+          input.form-control.underlined type="text"  placeholder="Url completa" name="settlement[pictures][][url]"
+    - else
+      - @settlement.pictures.each do |picture|
+        .row.picture
+          .col-sm-2
+            input type="hidden" name="settlement[pictures][][id]" value=picture.id
+            input.form-control.underlined type="text"  placeholder="Año" name="settlement[pictures][][year]" value=picture.year
+          .col-sm-8
+            input.form-control.underlined type="text"  placeholder="Url completa" name="settlement[pictures][][url]" value=picture.url
+          .col-sm-2.remove-picture-btn
+            div.btn.btn-secondary.btn-sm
+              i.fa.fa-times-circle
+              | Eliminar
+    .row.actions
+      .col-sm-12
+        div.btn.btn-primary.btn-sm.add-picture-btn
+          i.fa.fa-plus
+          | Agregar foto

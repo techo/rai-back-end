@@ -1,0 +1,10 @@
+---
+postgresql:
+  adapter: ''
+  host: ''
+  database: ''
+  user: ''
+  password: ''
+redis:
+  host: ''
+  port: ''

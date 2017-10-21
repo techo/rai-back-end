@@ -1,0 +1,42 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Components['settlement/form']({
+        el: $('form.settlement-form')
+      })
+      new RAI.Components['surveys/list']({
+        el: $('ul.surveys-list')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      span.text-muted Barrio/Asentamiento:
+      =" #{@settlement.name} (#{@settlement.string_id})"
+      span.sparkline.bar data-type="bar"
+  form.settlement-form name="settlement" action=url("/settlements/#{@settlement.string_id}") method="post"
+    .hidden
+      input type="hidden" name="_method" value="PUT"
+      == authenticity_token
+    .card.card-block
+      == partial :"/settlements/partials/form_inputs"
+      .form-group.row
+        .col-sm-10.offset-sm-2
+          button.btn.btn-success type="submit"
+            | Actualizar
+  section.section
+    .row.sameheight-container
+      .col-md-12
+        .card.sameheight-item
+          .card-block
+            .card-title-block
+              h3.title
+                ="Encuestas (#{@surveys.length})"
+                a.btn.btn-primary-outline.btn-sm.btn-oval href=url("/surveys/new?settlement_id=#{@settlement.string_id}") Agregar nueva encuesta
+            section.section
+              .row
+                .col-xs-12.items
+                  ul.item-list.striped.surveys-list
+                    == partial :"/partials/list_headers/survey", locals: { simple: true }
+                    - @surveys.each do |survey|
+                      == partial :'/partials/list_items/survey', locals: { survey: survey, settlement_id: @settlement.string_id, simple: true }

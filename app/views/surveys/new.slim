@@ -1,0 +1,26 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Components['survey/form']({
+        el: $('form.survey-form')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      - if @settlement
+        span.text-muted Nueva encuesta del Barrio/Asentamiento:
+        = " #{@settlement.name} / ID: #{@settlement.string_id}"
+      - else
+        | Nueva encuesta
+    p.title-description=="Carga de una nueva encuesta"
+    span.sparkline.bar data-type="bar"
+  == display_flash_message
+  form.survey-form name="survey" action=url("/surveys/new") method="post"
+    .hidden
+      == authenticity_token
+    .card.card-block
+      == partial :"/surveys/partials/form_inputs", locals: { is_new: true }
+      .form-group.row
+        .col-sm-12
+          button.btn.btn-success type="submit" Crear encuesta y cargar datos

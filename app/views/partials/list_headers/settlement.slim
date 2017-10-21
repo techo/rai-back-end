@@ -1,0 +1,20 @@
+- simple = simple || false
+li.item.item-list-header.hidden-sm-down
+  .item-row
+    .item-col.item-col-header.item-col-title
+      div
+        span Nombre del Barrio / Asentamiento
+    .item-col.item-col-header.item-col-year
+      div
+        span Creado
+    .item-col.item-col-header.item-col-town
+      .no-overflow
+        span Localidad
+    .item-col.item-col-header.item-col-city
+      .no-overflow
+        span Partido / Departamento
+    .item-col.item-col-header.item-col-country
+      .no-overflow
+        span Provincia
+    - unless simple
+      .item-col.item-col-header.fixed.item-col-actions-dropdown

@@ -1,0 +1,23 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Views['locations/show']({
+        el: $('form.province-form')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      span.text-muted Provincia:
+      =" #{@province.name}"
+      span.sparkline.bar data-type="bar"
+  form.province-form name="province" action=url("/provinces/#{@province.id}") method="post"
+    .hidden
+      input type="hidden" name="_method" value="PUT"
+      == authenticity_token
+    .card.card-block
+      == partial :"/locations/partials/province_inputs", locals: { province: @province }
+      .form-group.row
+        .col-sm-10.offset-sm-2
+          button.btn.btn-success type="submit"
+            | Actualizar

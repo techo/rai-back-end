@@ -1,0 +1,53 @@
+article.content.items-list-page
+  section.section
+    .row.sameheight-container
+      .col.col-xs-12
+        .title-search-block
+          .title-block
+            .row
+              .col-md-12
+                h3.title
+                  ="Localidades (#{@towns.count})"
+                  a.btn.btn-primary-outline.btn-sm.btn-oval href=url("/locations/town/new") Agregar nueva localidad
+                  a.btn.btn-primary-outline.btn-sm.btn-oval href=url("/locations/city/new") Agregar nuevo partido / departamento
+                  / a.btn.btn-primary-outline.btn-sm.btn-oval href=url("/locations/province/new") Agregar nueva provincia
+                p.title-description Todas las localidades
+        .card.items
+          ul.item-list.striped.surveys-list
+            li.item.item-list-header.hidden-sm-down
+              .item-row
+                .item-col.item-col-header.pull-left.item-col-title
+                  div
+                    span Nombre de la localidad
+                .item-col.item-col-header.item-city-name
+                  div
+                    span Partido / Departamento
+                .item-col.item-col-header.item-province-name
+                  div
+                    span Provincia
+                .item-col.item-col-header.item-country-name
+                  div
+                    span País
+            - @towns.each do |town|
+              li.item
+                .item-row
+                  .item-col.pull-left.item-col-title
+                    .item-heading Nombre
+                    a href=url("/locations/town/#{town.id}/#{town.slug}")
+                      - if town.name.empty?
+                        em Nombre no especificado
+                      - else
+                        h4.item-title= town.name
+                  .item-col.item-col-city-name
+                    .item-heading Partido / Departamento
+                    - city = town.city
+                    a href=url("/locations/city/#{city.id}/#{city.slug}")
+                      = city.name
+                  .item-col.item-col-province-name
+                    .item-heading Provincia
+                    - province = city.province
+                    a href=url("/locations/province/#{province.id}/#{province.slug}")
+                      = province.name
+                  .item-col.item-col-country-name
+                    .item-heading País
+                    div= town.city.province.country.name

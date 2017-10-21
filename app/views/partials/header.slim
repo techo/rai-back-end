@@ -1,0 +1,21 @@
+header.header
+  .header-block.header-block-collapse.hidden-lg-up
+    button#sidebar-collapse-btn.collapse-btn
+      i.fa.fa-bars
+  .header-block.header-block-search.hidden-sm-down
+    / form role="search"
+    /   .input-container
+    /     i.fa.fa-search
+    /     input placeholder="Search" type="search" /
+    /     .underline
+  .header-block.header-block-nav
+    ul.nav-profile
+      li.profile.dropdown
+        a.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+          .img style=("background-image: url(#{@current_user.gravatar_url})")
+          span.name
+            = @current_user.name
+        .dropdown-menu.profile-dropdown-menu
+          a.dropdown-item href="/logout"
+            i.fa.fa-power-off.icon
+            | Logout

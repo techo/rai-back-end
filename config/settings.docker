@@ -1,0 +1,10 @@
+---
+postgresql:
+  adapter: 'postgres'
+  host: 'db'
+  database: 'rai-2016'
+  user: 'docker'
+  password: 'docker'
+redis:
+  host: 'redis'
+  port: 6379

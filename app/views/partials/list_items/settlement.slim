@@ -1,0 +1,49 @@
+- simple = simple || false
+li.item
+  .item-row
+    .item-col.item-col-title class="#{ 'fixed pull-left' unless simple}"
+      .item-heading Nombre
+      div
+        a href=url("/settlements/#{settlement.string_id}")
+          h4.item-title= settlement.name
+          span.item-description="ID: #{settlement.string_id}"
+    .item-col.item-col-year
+      .item-heading Creado
+      div= settlement.creation_year
+    .item-col.item-col-town
+      .item-heading Localidad
+      .no-overflow
+        - town = settlement.town
+        a href=url("/locations/town/#{town.id}/#{town.slug}")
+          - if town.name.empty?
+            small Nombre no especificado
+          - else
+            = town.name
+    .item-col.item-col-city.no-overflow
+      .item-heading Partido / Departamento
+      .no-overflow
+        - city = settlement.city
+        a href=url("/locations/city/#{city.id}/#{city.slug}")
+          = city.name
+    .item-col.item-col-province.no-overflow
+      .item-heading Provincia
+      .no-overflow
+        - province = settlement.province
+        a href=url("/locations/province/#{province.id}/#{province.slug}")
+          = province.name
+    - unless simple
+      .item-col.fixed.item-col-actions-dropdown
+        .item-actions-dropdown
+          a.item-actions-toggle-btn
+            span.inactive
+              i.fa.fa-cog
+            span.active
+              i.fa.fa-chevron-circle-right
+          .item-actions-block
+            ul.item-actions-list
+              / li
+              /   a.remove data-target="#confirm-modal" data-toggle="modal" href="#"
+              /     i.fa.fa-trash-o
+              li
+                a.edit href=url("/settlements/#{settlement.string_id}")
+                  i.fa.fa-pencil

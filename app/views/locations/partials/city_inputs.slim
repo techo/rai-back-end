@@ -1,0 +1,16 @@
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Nombre:
+  .col-sm-10
+    input.form-control.underlined type="text" name="city[name]" value=city.name
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right
+    | Provincia:
+  .col-sm-10
+    select name="city[province_id]"
+      == province_options_for_select(city.province_id)
+.form-group.row
+  label.col-sm-2.form-control-label.text-xs-right Polígono:
+  .col-sm-10
+    textarea.poligon-text.form-control.underlined name="city[poligon]"
+      =city.poligon

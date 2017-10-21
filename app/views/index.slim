@@ -1,0 +1,83 @@
+article.content.dashboard-page
+  section.section
+    .row.sameheight-container
+      / .col.col-xs-12.col-sm-12.col-md-6.col-xl-5.stats-col
+      /   .card.sameheight-item.stats data-exclude="xs"
+      /     .card-block
+      /       .title-block
+      /         h4.title Estadísticas
+      /         p.title-description
+      /           | Algunas métricas generales
+      /       .row.row-sm.stats-container
+      /         .col-xs-12.col-sm-6.stat-col
+      /           .stat-icon
+      /             i.fa.fa-rocket
+      /           .stat
+      /             .value 5407
+      /             .name Active items
+      /           progress.progress.stat-progress max="100" value="75"
+      /             .progress
+      /               span.progress-bar style=("width: 75%;")
+      /         .col-xs-12.col-sm-6.stat-col
+      /           .stat-icon
+      /             i.fa.fa-shopping-cart
+      /           .stat
+      /             .value 78464
+      /             .name Items sold
+      /           progress.progress.stat-progress max="100" value="25"
+      /             .progress
+      /               span.progress-bar style=("width: 25%;")
+      /         .col-xs-12.col-sm-6.stat-col
+      /           .stat-icon
+      /             i.fa.fa-line-chart
+      /           .stat
+      /             .value $80.560
+      /             .name Monthly income
+      /           progress.progress.stat-progress max="100" value="60"
+      /             .progress
+      /               span.progress-bar style=("width: 60%;")
+      /         .col-xs-12.col-sm-6.stat-col
+      /           .stat-icon
+      /             i.fa.fa-users
+      /           .stat
+      /             .value 359
+      /             .name Total users
+      /           progress.progress.stat-progress max="100" value="34"
+      /             .progress
+      /               span.progress-bar style=("width: 34%;")
+      /         .col-xs-12.col-sm-6.stat-col
+      /           .stat-icon
+      /             i.fa.fa-list-alt
+      /           .stat
+      /             .value 59
+      /             .name Tickets closed
+      /           progress.progress.stat-progress max="100" value="49"
+      /             .progress
+      /               span.progress-bar style=("width: 49%;")
+      /         .col-xs-12.col-sm-6.stat-col
+      /           .stat-icon
+      /             i.fa.fa-dollar
+      /           .stat
+      /             .value $780.064
+      /             .name Total income
+      /           progress.progress.stat-progress max="100" value="15"
+      /             .progress
+      /               span.progress-bar style=("width: 15%;")
+      / .col.col-xs-12.col-sm-12.col-md-6.col-xl-7.history-col
+      /   .card.sameheight-item data-exclude="xs"
+      /     .card-header.card-header-sm.bordered
+      /       .header-block
+      /         h3.title History
+      /       ul.nav.nav-tabs.pull-right role="tablist"
+      /         li.nav-item
+      /           a.nav-link.active data-toggle="tab" href="#visits" role="tab"  Visits
+      /         li.nav-item
+      /           a.nav-link data-toggle="tab" href="#downloads" role="tab"  Downloads
+      /     .card-block
+      /       .tab-content
+      /         #visits.tab-pane.active.fade.in role="tabpanel"
+      /           p.title-description Number of unique visits last 30 days
+      /           #dashboard-visits-chart
+      /         #downloads.tab-pane.fade role="tabpanel"
+      /           p.title-description Number of downloads last 30 days
+      /           #dashboard-downloads-chart

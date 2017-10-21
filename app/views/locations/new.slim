@@ -1,0 +1,23 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Components['location/form']({
+        el: $('form.location-form')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      = create_location_title_text(@type)
+    p.title-description=="Carga de una nueva ubicación"
+    span.sparkline.bar data-type="bar"
+  == display_flash_message
+  form.location-form name="location" action=url("/locations/#{@type}/new") method="post"
+    .hidden
+      == authenticity_token
+    .card.card-block
+      == partial :"/locations/partials/#{@type}_inputs", locals: { "#{@type}" => @location }
+      .form-group.row
+        .col-sm-10.offset-sm-2
+          button.btn.btn-success type="submit"
+            = create_location_button_text(@type)

@@ -1,0 +1,33 @@
+version: '2.1'
+
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: rai-2016
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+    ports:
+      - 5433:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "docker"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  redis:
+    image: redis:3.2
+  app:
+    build: .
+    ports:
+      - 9393:9292
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./:/app
+      - ./config/settings.docker:/app/config/settings.yml
+    entrypoint: /app/docker-entrypoint.sh
+    command: rackup -o 0.0.0.0
+

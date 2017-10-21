@@ -1,0 +1,23 @@
+article.content.items-list-page
+  .title-search-block
+    .title-block
+      .row
+        .col-md-8
+          h3.title
+            ="Asentamientos (#{@settlements.total_entries})"
+            a.btn.btn-primary-outline.btn-sm.btn-oval href=url("/settlements/new") Agregar nuevo asentamiento
+          p.title-description Listado completo de asentamientos
+    .items-search
+      form.form-inline role="search" action=url('/settlements/search') method="get"
+        .input-group
+          input.form-control placeholder="Buscar..." type="text" name="q"
+          span.input-group-btn
+            button.btn.btn-success
+              i.fa.fa-search
+  .card.items
+    ul.item-list.striped
+      == partial :"/partials/list_headers/settlement"
+      - @settlements.each do |settlement|
+        == partial :'/partials/list_items/settlement', locals: { settlement: settlement }
+  nav.text-xs-right
+    == will_paginate @settlements, previous_label: '« Anterior', next_label: 'Siguiente »'

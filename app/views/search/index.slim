@@ -1,0 +1,25 @@
+- searching_name = searching_for_name(params[:type])
+- searching_word = searching_for_word(params[:type])
+- searching_singular_type = searching_for_singular_type(params[:type])
+article.content.items-list-page
+  .title-search-block
+    .title-block
+      .row
+        .col-md-8
+          h3.title
+            ="Buscando #{searching_name} (#{@results.total_entries})"
+          p.title-description=="#{searching_name} #{searching_word} al buscar la palabra <strong>#{params[:q]}</strong>"
+    .items-search
+      form.form-inline role="search" action=url("/#{params[:type]}/search") method="get"
+        .input-group
+          input.form-control placeholder="Buscar..." type="text" name="q" value=params[:q]
+          span.input-group-btn
+            button.btn.btn-success
+              i.fa.fa-search
+  .card.items
+    ul.item-list.striped
+      == partial :"/partials/list_headers/#{searching_singular_type}"
+      - @results.each do |result|
+        == partial :"/partials/list_items/#{searching_singular_type}", locals: { "#{searching_singular_type}" => result }
+  nav.text-xs-right
+    == will_paginate @results, previous_label: '« Anterior', next_label: 'Siguiente »'

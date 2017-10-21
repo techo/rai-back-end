@@ -1,0 +1,36 @@
+- simple = simple || false
+li.item
+  .item-row
+    .item-col.pull-left.item-col-year
+      .item-heading Año
+      div
+        a href=url("/settlements/#{settlement_id}/survey/#{survey.year}")
+          h4.item-title= survey.year
+    .item-col.item-col-visible
+      .item-heading Mostrar
+      div
+        - if survey.visible?
+          i.fa.fa-check
+        - else
+          i.fa.fa-times
+    .item-col.item-col-type
+      .item-heading Tipo
+      h4.item-title= survey.settlement_type.try(:capitalize)
+      - unless simple
+        span.item-description="#{survey.settlement.name} | ID: #{settlement_id}"
+    .item-col.item-col-families-count
+      .item-heading Cantidad de Familias
+      div= survey.families_count
+    .item-col.no-overflow
+      .item-heading Identificador
+      .no-overflow
+        div= survey.identify.try(:capitalize)
+    .item-col.fixed.item-col-actions-dropdown
+      a.edit href=url("/settlements/#{settlement_id}/survey/#{survey.year}")
+        i.fa.fa-pencil
+      form.remove-survey-form name="settlement" action=url("/surveys/#{survey.settlement_id}/#{survey.id}") method="post"
+        .hidden
+          input type="hidden" name="_method" value="DELETE"
+          == authenticity_token
+        a.delete-button data-target="#confirm-modal" data-toggle="modal" href="#"
+          i.fa.fa-trash-o

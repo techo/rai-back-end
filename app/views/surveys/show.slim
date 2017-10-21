@@ -1,0 +1,25 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Components['survey/form']({
+        el: $('form.survey-form')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      span.text-muted Encuesta del Barrio/Asentamiento:
+      = " #{@settlement.name} / ID: #{@settlement.string_id}"
+    p.title-description=="Del año <strong>#{@survey.year}</strong>"
+    span.sparkline.bar data-type="bar"
+  == display_flash_message
+  form.survey-form name="survey" action=url("/surveys/#{@survey.id}") method="post"
+    .hidden
+      input type="hidden" name="_method" value="PUT"
+      == authenticity_token
+      input type="hidden" name="settlement_string_id" value=@settlement.string_id
+    .card.card-block
+      == partial :"/surveys/partials/form_inputs"
+      .form-group.row
+        .col-sm-12
+          button.btn.btn-success type="submit" Actualizar datos

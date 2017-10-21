@@ -1,0 +1,37 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Views['locations/show']({
+        el: $('form.city-form')
+      })
+    })()
+article.content.item-editor-page
+  .title-block
+    h3.title
+      span.text-muted Partido / Departamento:
+      =" #{@city.name}"
+      span.sparkline.bar data-type="bar"
+  form.city-form name="city" action=url("/cities/#{@city.id}") method="post"
+    .hidden
+      input type="hidden" name="_method" value="PUT"
+      == authenticity_token
+    .card.card-block
+      == partial :"/locations/partials/city_inputs", locals: { city: @city }
+      .form-group.row
+        .col-sm-10.offset-sm-2
+          button.btn.btn-success type="submit"
+            | Actualizar
+  section.section
+    .row.sameheight-container
+      .col-md-12
+        .card.sameheight-item
+          .card-block
+            .card-title-block
+              h3.title="Barrios / Asentamientos: (#{@settlements.length})"
+            section.section
+              .row
+                .col-xs-12.items.settlement-list
+                  ul.item-list.striped
+                    == partial :"/partials/list_headers/settlement", locals: { simple: true }
+                    - @settlements.each do |settlement|
+                      == partial :'/partials/list_items/settlement', locals: { settlement: settlement, simple: true }

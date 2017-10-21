@@ -1,0 +1,24 @@
+aside.sidebar
+  .sidebar-container
+    .sidebar-header
+      .brand
+        img src="/assets/logo.png" height="25px"
+    nav.menu
+      ul#sidebar-menu.nav.metismenu
+        / li class="#{ 'active' if @menu_section == 'dashboard' }"
+        /   a href="/"
+        /     i.fa.fa-home
+        /     | Escritorio
+        li class="#{ 'active' if @menu_section == 'settlements' }"
+          a href="/settlements"
+            i.fa.fa-map-marker
+            | Asentamientos
+        li class="#{ 'active' if @menu_section == 'surveys' }"
+          a href="/surveys"
+            i.fa.fa-list-alt
+            | Encuestas
+        li class="#{ 'active' if @menu_section == 'locations' }"
+          a href="/locations"
+            i.fa.fa-globe
+            | Ubicaciones
+#sidebar-overlay.sidebar-overlay

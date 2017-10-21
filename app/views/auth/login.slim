@@ -1,0 +1,28 @@
+doctype html
+html lang='es-AR' xmlns="http://www.w3.org/1999/xhtml"
+  head
+    meta charset="utf-8"
+    title= "Login"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="locale" content='es-AR'
+    == csrf_meta_tags
+    == stylesheet_tag 'editor'
+  body
+    .auth
+      .auth-container
+        .card
+          header.auth-header
+            img src="/assets/logo.png" height="25px"
+          .auth-content
+            == display_flash_message
+            form#login-form action="/login" method="POST" novalidate=""
+              .hidden
+                == authenticity_token
+              .form-group
+                label for="email"  E-Mail
+                input#email.form-control.underlined name="user[email]" placeholder="Tu dirección de email"required="" type="email"
+              .form-group
+                label for="password"  Contraseña
+                input#password.form-control.underlined name="user[password]" placeholder="Tu contraseña" required="" type="password"
+              .form-group
+                button.btn.btn-block.btn-primary type="submit"  Ingresar

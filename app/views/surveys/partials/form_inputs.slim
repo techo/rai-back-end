@@ -1,0 +1,58 @@
+- is_new = is_new || false
+.row.survey-data
+  .title-block.col-xs-12
+    h3.title Datos sobre el relevamiento
+  .survey-content-block.col-xs-12
+    - if is_new
+      .row
+        .form-group.col-xs-12
+          label.control-label Tipo:
+          select name="survey[settlement_id]"
+            == settlement_options_for_select(@survey.settlement_id)
+    .row
+      .form-group.col-xs-12.col-sm-6.col-md-4
+        label.control-label Año:
+        - if is_new
+          select name="survey[year]"
+            == options_for_years
+        - else
+          input.form-control.underlined type="text" name="survey[year]" disabled="disabled" value=@survey.year
+      .form-group.col-xs-12.col-sm-6.col-md-4
+        label.control-label Cantidad de familias:
+        input.form-control.underlined type="text" name="survey[families_count]" value=@survey.families_count
+      .form-group.col-xs-12.col-sm-12.col-md-4
+        label.control-label Tipo:
+        select name="survey[settlement_type]"
+          == options_for_select('tipo_de_barrio', @survey.settlement_type)
+    .row
+      .form-group.col-xs-12
+        label.control-label Polígono:
+        textarea.poligon-text.form-control.underlined name="survey[poligon]"
+          =@survey.poligon
+    .row
+      .form-group.col-xs-12
+        label.control-label Mostrar encuesta en el Mapa (via la API):
+        label
+          input.radio.squared name="survey[visible]" type="radio" value="true" checked=('checked' if @survey.visible?)
+          span Mostrar
+        label
+          input.radio.squared name="survey[visible]" type="radio" value="false" checked=('checked' unless @survey.visible?)
+          span No Mostrar
+    .row
+      - Survey.data_fields_keys.each do |field_key|
+        .form-group.col-xs-12.col-sm-12.col-md-6
+          label.control-label= "#{titleize(field_key)}:"
+          - value = @survey.send(:"#{field_key}")
+          - if is_a_select_input?(field_key)
+            select name="survey[data][#{field_key}]"
+              == options_for_select(field_key, value)
+          - else
+            input.form-control.underlined type="text" name="survey[data][#{field_key}]" value=value
+.row.indicators-data
+  .title-block.col-xs-12
+    h3.title Indicadores
+    input type="hidden" name="survey[indicator][id]" value=@survey.indicator.try(:id)
+  - Indicator::DATA_FIELDS.each do |field_key|
+    .form-group.col-xs-12.col-sm-6.col-md-4
+      label.control-label= "#{titleize(field_key)}:"
+      input.form-control.underlined.only-numbers type="text" name="survey[indicator][data][#{field_key}]" value= @survey.indicator.try(:"#{field_key}")

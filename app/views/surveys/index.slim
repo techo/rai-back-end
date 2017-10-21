@@ -1,0 +1,23 @@
+- content_for :javascript do
+  javascript:
+    ;(function(){
+      new RAI.Components['surveys/list']({
+        el: $('ul.surveys-list')
+      })
+    })()
+article.content.items-list-page
+  .title-search-block
+    .title-block
+      .row
+        .col-md-6
+          h3.title
+            ="Encuestas (#{@surveys.total_entries})"
+            a.btn.btn-primary-outline.btn-sm.btn-oval href=url("/surveys/new") Agregar nueva encuesta
+          p.title-description Total de encuestas
+  .card.items
+    ul.item-list.striped.surveys-list
+      == partial :"/partials/list_headers/survey"
+      - @surveys.each do |survey|
+        == partial :'/partials/list_items/survey', locals: { survey: survey, settlement_id: survey.settlement.string_id, simple: false }
+  nav.text-xs-right
+    == will_paginate @surveys, previous_label: '« Anterior', next_label: 'Siguiente »'
