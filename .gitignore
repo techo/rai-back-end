@@ -15,6 +15,7 @@
 !/tmp/.keep
 local.*
 config/settings.yml
+config/deploy.yml
 /db/seeds/**/*
 !/db/seeds/.keep
 
